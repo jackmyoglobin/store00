@@ -1,5 +1,5 @@
 #Create User(s) using CSV Import
-
+#Use the sample_csv.csv as a template file when building import file#
 Clear-Host
 
 #Import active directory module for running AD cmdlets
