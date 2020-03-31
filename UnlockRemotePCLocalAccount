@@ -1,0 +1,28 @@
+clear-host
+$username = "User" #Replace User with client local username#
+
+Write-Host "Input hostname of Workstation to unlock local account: '$username'" -foregroundcolor Green -backgroundcolor Black
+$hostname = read-host #Command Window will prompt you to input workstation hostname#
+
+[ADSI]$account = [ADSI] "WinNT://$hostname/$username"
+
+If ($account.IsAccountLocked -ne $null){
+
+    if ($account.IsAccountLocked -ne $false) {
+        Try {
+            $account.IsAccountLocked = $false
+            $account.SetInfo()
+            Write-Host "The account: '$Username' is now unlocked on $hostname." -foregroundcolor Cyan -backgroundcolor Black
+            }
+            Catch{
+                write-host "--ERROR-- : $($_.Exception.Message) : --ERROR--" -foregroundcolor Red -backgroundcolor Black
+                }
+            }
+            Else{
+                write-host "The account: '$Username' is not locked on $hostname." -foregroundcolor Yellow -backgroundcolor Black
+            }
+        }
+    Else{
+        write-host "The account: '$Username' does not exist on $hostname." -foregroundcolor Yellow -backgroundcolor Black
+        }
+
