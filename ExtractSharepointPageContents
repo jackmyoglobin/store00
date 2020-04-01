@@ -1,0 +1,16 @@
+#Extract Sharepoint Pages and Content Links
+$intranet = import-csv 'C:\temp\SharepointSites.csv' #CSV should contain URL of Sharepoint page(s) and Site Title(s)#
+$username = $env:USERNAME
+$PWord = ConvertTo-SecureString -String #removed after use#
+$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username,$PWord #removed after use#
+
+foreach ($page in $intranet){
+
+$webUrl = $page.URL
+$title = $page.Name
+$cred = $Credential
+
+$content = invoke-webrequest $webUrl -Credential $cred
+$content.Links | Select outertext,href | out-file #path#\$title.txt -verbose
+
+} 
