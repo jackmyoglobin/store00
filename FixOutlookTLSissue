@@ -1,0 +1,19 @@
+#Fix Outlook TLS Issue by modifying or adding Key or Value
+Invoke-Command -ComputerName %hostname% -ScriptBlock {
+    New-ItemProperty 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp\' -Type DWORD -Name 'DefaultSecureProtocols' -Value '2560'
+}
+
+#Script to Fix Outlook TLS Issue
+Invoke-Command -ComputerName %hostname% -ScriptBlock {
+
+            If(!(Get-ItemProperty 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp\' -Name 'DefaultSecureProtocols')){
+                New-ItemProperty 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp\' -Type DWORD -Name 'DefaultSecureProtocols' -Value '2560'
+            }Else{
+                'Already has key'
+            }
+            If(!(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp\' -Name 'DefaultSecureProtocols')){
+                New-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp\' -Type DWORD -Name 'DefaultSecureProtocols' -Value '2560'
+            }Else{
+                'Already has key'
+            }
+}
