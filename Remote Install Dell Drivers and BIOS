@@ -45,7 +45,7 @@ foreach ($object in $importcsv){
         } -AsJob
       }
       
-  #Note: You can also run the same script above for installing BIOS, just change the '-ArgumentList' to "/s","/f","/r"'
+  #Note: You can also run the same script above for updating BIOS, just change the '-ArgumentList' to "/s","/f","/r"'
   "/s" = Silent Switch
   "/f" = ignores errors and forces installer to proceed
   "/r" = configures the installer to automatically restart to complete BIOS flash update
