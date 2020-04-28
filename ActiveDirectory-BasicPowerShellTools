@@ -38,3 +38,4 @@ Get-ADPrincipalGroupMembership %username% |Select Name | Sort Name
 
 #Query Ad User by Job Title(s)
 get-aduser -Filter {Title -like "%jobtitle%" -or Title -like "%jobtitle%"} -SearchBase 'OU=,OU=,DC=Domain,DC=Local' -Properties title | select Name,samaccountname,title | Sort-Object -Property name | Export-Csv '\\server\share'
+Get-Aduser -Filter {Description -like "%description%"} -SearchBase 'OU=,DC=,DC=' | select name,samaccountname | FL
