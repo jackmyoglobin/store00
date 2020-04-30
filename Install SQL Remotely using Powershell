@@ -1,0 +1,103 @@
+##This script was designed for a single worksatation
+##It can be modified to run on multiple machines
+
+#First you want to establish your install package directory
+#--example--#
+    $Source = \\Share\Path\InstallPackage
+    
+#Next you want to establish your client workstation to install to
+#--example--#
+    $Destination = \\<hostname>\root\folder
+
+#Now, we need to detemine how you want to install SQL
+#If you have an "ini" file, you can use that -- this script uses an "ini" file
+#--example--#
+    Start-Process <SQL> -ArgumentList "/q","/IAccesptSQLServerLicenseTerms","/configurationfile='C:\SQL\2012_Install_ConfigurationFile.ini'" -Wait
+
+#If you do not have an "ini" file, you can use cmdlet options to configure your SQL
+#For examples of Powershell commands to install desired state see link below
+#--https://docs.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server-with-powershell-desired-state-configuration?view=sql-server-ver15--#
+
+
+#Decide whether you want to run this as a Job, progression bar, or silent
+#This script runs each operation using a progression bar for tracking
+#--example--#
+    for ($percent=0; $percent -le 100; $percent++)
+    ###This progression will start from lowest integer, and as script progress it increases accordingly to the largest integer
+    ###You can also customize it
+    #--example--#
+        Write-Progress -Activity "Installing" -Status "Progressing" -PercentComplete $percent
+
+
+
+#--Begin--#
+
+$SourceFolder = '\\<source>\SQL'
+
+$DestFolder = '\\<client>\c$\SQL'
+
+ 
+
+Robocopy $SourceFolder /r:0 /w:0 $DestFolder /mir
+
+ 
+#Each Invoke Command is repetitive, they work the same installing performing different functions
+invoke-command -ComputerName <client> -ScriptBlock{
+
+$SQL2012 = "C:\SQL\SqlExpress2012SP2\SQLEXPR_2012_x64_ENU.exe"
+
+for ($percent=0; $percent -le 100; $percent++)
+
+    {
+
+        Write-Progress -Activity "Installing SQL Server 2012" -Status "Progress.." -PercentComplete $percent
+
+        Start-Process $SQL2012 -ArgumentList "/q","/IAccesptSQLServerLicenseTerms","/configurationfile='C:\SQL\2012_Install_ConfigurationFile.ini'" -Wait
+
+    }
+
+}
+#A restart is always requried at the end of SQL install/patch, using the "-wait" option it will continuously PING the target PC until it's online again
+        Restart-Computer -ComputerName <client> -Force -Wait
+
+ 
+#Next argument will then run after successful reboot
+invoke-command -ComputerName <client> -ScriptBlock{
+
+$SQL2012ServicePack2 = "C:\SQL\SqlExpress2012SP2\SP2\SQLServer2012SP2-KB2958429-x64-ENU.exe"
+
+for ($percent=0; $percent -le 100; $percent++)
+
+    {
+
+        Write-Progress -Activity "Updating SQL Server 2012 Service Pack" -Status "Progress.." -PercentComplete $percent
+
+        Start-Process $SQL2012ServicePack2 -ArgumentList "/quiet","/IAccesptSQLServerLicenseTerms","/ACTION=Patch","/AllInstances" -Wait
+
+    }
+
+}
+
+        Restart-Computer -ComputerName <client> -Force -Wait
+
+ 
+
+invoke-command -ComputerName <client> -ScriptBlock{
+
+$SQL2014 = "C:\SQL\SqlExpress2014\SQLEXPR_2014_x64_ENU.exe"
+
+for ($percent=0; $percent -le 100; $percent++)
+
+    {
+
+        Write-Progress -Activity "Installing SQL Server 2014" -Status "Progress.." -PercentComplete $percent
+
+        Start-Process $SQL2014 -ArgumentList "/q","/IAccesptSQLServerLicenseTerms","/configurationfile='C:\SQL\2014_Upgrade_ConfigurationFile.ini'" -Wait
+
+    }
+
+}
+
+        Restart-Computer -ComputerName <client> -Force -Wait
+
+ 
