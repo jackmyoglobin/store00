@@ -1,15 +1,17 @@
 #This should only be used if sub folders did not inherit parent folder permissions, eventhough inheretance is enabled
-#Basically, ensuring to tell PowerShell that you want to work in the directory <path> you want to modify
-#Then grab a collection of all subfolder/items under the directory <path>
-#Set the permissions to be applied
-#Run the change across all subfolder/items
 
+# This is for insurance, tell PowerShell that you want to work in the directory <path> you want to modify
 Set-Location "<path>"
 
+#Then grab a collection of all subfolder/items under the directory <path>
 $folders = Get-ChildItem "<Path>"
+
 foreach ($subfolder in $folders){
     
     $folder = $subfolder.name
+
+#Set the permissions to be applied
+#Run the change across all subfolder/items
 
     $NTFSPermissions = Get-Acl "<path>" 
 
