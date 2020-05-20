@@ -31,7 +31,7 @@ foreach ($object in $importcsv){
        
   #As an end note, you can also add the "-AsJob" option to assign it as a background job to the client machine
   
-  --Full Example--
+  --Full Example for Driver Install--
   
   $importCSV = Import-CSV \\source\file.csv
   
@@ -42,19 +42,19 @@ foreach ($object in $importcsv){
     
     Invoke-Command -ComputerName $hostname -ScriptBlock{
       Start-Process 'C:\softwares\installer.exe' -ArgumentList "/f","/s" -Wait
-        } -AsJob
+        }
       }
       
-  --Alternative Example--   
+  --Alternative Example for Driver Install--   
   
   #This example adds in ROBOCOPY function & Progress Bar UI for the install process
 
-  $PC = Import-Csv "\\path\file.csv"
+  $ImportCSV = Import-Csv "\\path\file.csv"
   $source = "\\path\folder"
 
-  foreach ($import in $PC) {
+  foreach ($object in $importCSV) {
 
-    $hostname = $import.name
+    $hostname = $object.name
 
     robocopy $source /r:0 /w:0 "\\$hostname\c$\Dell\3050" /mir
 
@@ -65,8 +65,30 @@ foreach ($object in $importcsv){
         Start-Process "C:\softwares\installer.exe" -ArgumentList "/f","/s" -Wait}
     }
 
-  #Note: You can also run the same script above for updating BIOS, just change the '-ArgumentList' to "/s","/f","/r"
+
+  --Full Example for BIOS Install--   
+
+  #"AsJob" switch turns this command into a backgroung process on the target workstation
+  #That means the command window will not animate a processes, and it will run on the target workstation
+
+  $ImportCSV = Import-Csv "\\path\file.csv"
+  
+  foreach ($object in $importCSV){
+    $hostname = $object.name
+    New-Item -ItemType Directory -Path '\\$hostname\c$\softwares'
+    Copy-Item -Path 'C:\softwares\BIOS.exe' -destination '\\$hostname\c$\softwares\BIOS.exe'
+    
+    Invoke-Command -ComputerName $hostname -ScriptBlock{
+      Start-Process 'C:\softwares\BIOS.exe' -ArgumentList "/f","/s","/r" -Wait
+        } -AsJob
+      }
+
+----------------------------------
+
+ArgumentList options:
   "/s" = Silent Switch
   "/f" = ignores errors and forces installer to proceed
+  
+  **For BIOS only**
   "/r" = configures the installer to automatically restart to complete BIOS flash update
    
