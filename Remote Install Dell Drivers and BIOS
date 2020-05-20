@@ -45,6 +45,26 @@ foreach ($object in $importcsv){
         } -AsJob
       }
       
+  --Alternative Example--   
+  
+  #This example adds in ROBOCOPY function & Progress Bar UI for the install process
+
+  $PC = Import-Csv "\\path\file.csv"
+  $source = "\\path\folder"
+
+  foreach ($import in $PC) {
+
+    $hostname = $import.name
+
+    robocopy $source /r:0 /w:0 "\\$hostname\c$\Dell\3050" /mir
+
+  Invoke-Command -ComputerName $hostname -ScriptBlock {
+        for ($percent=0; $percent -le 100; $percent++)
+    {
+        Write-Progress -Activity "Installing Drivers Set 1" -Status "Progress.." -PercentComplete $percent
+        Start-Process "C:\softwares\installer.exe" -ArgumentList "/f","/s" -Wait}
+    }
+
   #Note: You can also run the same script above for updating BIOS, just change the '-ArgumentList' to "/s","/f","/r"
   "/s" = Silent Switch
   "/f" = ignores errors and forces installer to proceed
