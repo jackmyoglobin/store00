@@ -1,0 +1,10 @@
+If((Get-WmiObject Win32_Computersystem).name -like 'hostname')
+    {If((Get-WmiObject win32_operatingsystem).Caption -like '*Windows 10*')
+        {If((Get-BitLockerVolume).ProtectionStatus -ne 'On')
+        {Enable-BitLocker -MountPoint 'c:' -EncryptionMethod XtsAes128 -UsedSpaceOnly -RecoveryPasswordProtector}
+Else{'Bitlocker is Already Enabled'}}
+    Else{'Not Windows 10'}}
+        Else{'Workstation is not a Laptop'}
+
+
+
