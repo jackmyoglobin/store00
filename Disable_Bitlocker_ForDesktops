@@ -1,0 +1,12 @@
+#This is meant for disabling Bitlocker on Desktops only
+
+hostname | Set-Variable -Name "hostname"
+IF ($hostname -contains "D" -or "d") {
+     get-bitlockervolume -mountpoint c | select -expandproperty protectionstatus | Set-Variable -Name "BLS"
+     }
+        Else {'Client Workstation is not a Desktop'}
+            IF ($BLS -like "On") {
+                Get-BitlockerVolume | select -expandproperty mountpoint | Set-Variable -Name "BLV"
+                Disable-BitLocker -MountPoint $BLV          
+            }
+                Else {'Bitlocker is not enabled'}
