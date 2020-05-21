@@ -1,0 +1,1 @@
+If((Get-WmiObject win32_operatingsystem).Caption -like '*Windows 10*'){If((Get-BitLockerVolume).ProtectionStatus -ne 'On'){Enable-BitLocker -MountPoint 'c:' -EncryptionMethod XtsAes128 -UsedSpaceOnly -RecoveryPasswordProtector}Else{'BitlockerAlreadyEnabled'}}Else{'NotWindows10'}
