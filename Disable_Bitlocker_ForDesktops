@@ -1,6 +1,6 @@
 #This is meant for disabling Bitlocker on Desktops only
 
-IF ((Get-WmiObject Win32_Computersystem).name -like '*D')
+IF ((Get-WmiObject Win32_Computersystem).name -like 'hostname')
 {If((Get-BitLockerVolume).ProtectionStatus -eq 'On')
     {
         Get-BitlockerVolume | select -expandproperty mountpoint | Set-Variable -Name "BLV"
