@@ -3,7 +3,7 @@ If((Get-WmiObject Win32_Computersystem).name -like '*L')
         {If((Get-Tpm).TpmReady -eq 'True')
             {If((Get-BitLockerVolume).ProtectionStatus -ne 'On')
             {Enable-BitLocker -MountPoint 'c:' -EncryptionMethod XtsAes128 -UsedSpaceOnly -RecoveryPasswordProtector}
-            Else{'Bitlocker is Already Enabled or TPM is not enabled'}}
+            Else{'Bitlocker is Already Enabled'}}
         Else{'TPM is not Enabled'}}
     Else{'OS is not compatible'}}
  Else{'Workstation is not a Laptop'}
