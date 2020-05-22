@@ -1,4 +1,4 @@
-If((Get-WmiObject Win32_Computersystem).name -like '*L')
+If((Get-WmiObject Win32_Computersystem).name -like 'hostname')
     {If((Get-WmiObject win32_operatingsystem).Caption -like '*Windows 10*')
         {If((Get-Tpm).TpmReady -eq 'True')
             {If((Get-BitLockerVolume).ProtectionStatus -ne 'On')
