@@ -1,4 +1,6 @@
-#This should only be used if sub folders did not inherit parent folder permissions, eventhough inheretance is enabled
+#This should only be used if sub folders or sub items: 
+1. parent permissions were not inherited, even if inheritance is enabled
+2. if sub directories do not have unique permissions
 
 # This is for insurance, tell PowerShell that you want to work in the directory <path> you want to modify
 Set-Location "<path>"
@@ -14,7 +16,7 @@ foreach ($subfolder in $folders){
 #Run the change across all subfolder/items
 
     $NTFSPermissions = Get-Acl "<path>" 
-
+        #Specify the permissions you want to assign to sub folders/items
         $accessrule = New-Object System.Security.AccessControl.FileSystemAccessRule("$permission","Modify","Allow")
 
         $NTFSPermissions.SetAccessRule($accessrule)
