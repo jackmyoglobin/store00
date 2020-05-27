@@ -47,3 +47,32 @@ Get-ADUser $DestUser -Property MemberOf | ForEach-Object {
 $_.MemberOf | Get-ADGroup | select Name -ExpandProperty Name | sort name
 }
 
+-----Full Example----
+
+$group1 = "Domain A*"
+$group2 = "Everyo*"
+
+Write-Host "Input Username of User whose groups you would like to copy" -foregroundcolor Green -backgroundcolor Black
+$SourceUser = Read-Host
+"`n"
+Write-Host "Input Username of User who will receive: $SourceUser's groups" -foregroundcolor Green -backgroundcolor Black
+$DestUser = Read-Host
+"`n"
+$SourceGroups = Get-ADUser $SourceUser -Property MemberOf | ForEach-Object {
+$_.MemberOf | Get-ADGroup | select Name -ExpandProperty Name | sort name | Where-Object {
+    (
+    $_.name -notlike $group1 -and
+    $_.name -notlike $group2
+    )
+    }
+}
+ForEach ($Group in $SourceGroups)
+{
+Add-ADGroupMember $Group -Members $DestUser
+Write-Host "Adding $Group to $DestUser's Account" -foregroundcolor Cyan -backgroundcolor Black
+}
+"`n"
+Write-Host "Groups that were successfully added to $DestUser Member-Of AFTER script"
+Get-ADUser $DestUser -Property MemberOf | ForEach-Object {
+$_.MemberOf | Get-ADGroup | select Name -ExpandProperty Name | sort name
+}
