@@ -80,3 +80,5 @@ Write-Host "Groups that were successfully added to $DestUser Member-Of AFTER scr
 Get-ADUser $DestUser -Property MemberOf | ForEach-Object {
 $_.MemberOf | Get-ADGroup | select Name -ExpandProperty Name | sort name
 }
+
+-----End-----
