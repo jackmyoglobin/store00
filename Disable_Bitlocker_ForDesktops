@@ -3,8 +3,8 @@
 **This part is subjective and does not have exist**#-If you've named your workstations in such a way to easily identify if a laptopr or desktop#
 #Step 1.0-Request a workstation's hostname#
 #Step 2.0-Request Bitlocker protection status#
-#Step 2.1-Obtain Bitlocker Volume & create a variable for the result#
-#Step 2.2-Disable protection#
+#Step 2.1-Only run when Step 2.0 succeeds, Obtain Bitlocker Volume & create a variable for the result#
+#Step 2.2-Followup to Step 2.1, Disable protection#
 #Step 2.a-Only run when Step 2.0 fails, stop script#
 #Step 1.a-Only run when Step 1.0 fails, stop script#
 
