@@ -40,5 +40,3 @@ Set-ADAccountExpiration -Identity %username% -DateTime '04/26/2019 17:00:00'
 #Get AD User Expiration#
 Get-ADUser -Identity %username% -Properties AccountExpirationDate | Select-Object -Property SamAccountName, AccountExpirationDate
 
-
-
