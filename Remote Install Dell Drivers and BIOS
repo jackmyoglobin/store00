@@ -1,3 +1,5 @@
+-----Explaination-----
+
 #Installing Dell Driver Remotely
 
 #Create a variable for CSV import
@@ -31,7 +33,7 @@ foreach ($object in $importcsv){
        
   #As an end note, you can also add the "-AsJob" option to assign it as a background job to the client machine
   
-  --Full Example for Driver Install--
+  -----Full Example for Driver Install-----
   
   $importCSV = Import-CSV \\source\file.csv
   
@@ -66,7 +68,7 @@ foreach ($object in $importcsv){
     }
 
 
-  --Full Example for BIOS Install--   
+  -----Full Example for BIOS Install-----
 
   #"AsJob" switch turns this command into a backgroung process on the target workstation
   #That means the command window will not animate a processes, and it will run on the target workstation
@@ -83,7 +85,7 @@ foreach ($object in $importcsv){
         } -AsJob
       }
 
-----------------------------------
+-----Notes-----
 
 ArgumentList options:
   "/s" = Silent Switch
@@ -92,3 +94,4 @@ ArgumentList options:
   **For BIOS only**
   "/r" = configures the installer to automatically restart to complete BIOS flash update
    
+-----End-----
