@@ -1,6 +1,10 @@
+-----Explaination-----
+
 #Extract Sharepoint Pages and Content Links
 #CSV should contain URL of Sharepoint page(s) and Site Title(s)#
 #The script must be ran under an account with Sharepoint owner rights#
+
+-----Guide------
 
 $intranet = import-csv 'C:\temp\SharepointSites.csv' 
 $username = $env:USERNAME
@@ -17,3 +21,5 @@ $content = invoke-webrequest $webUrl -Credential $cred
 $content.Links | Select outertext,href | out-file #path#\$title.txt -verbose
 
 } 
+
+-----End-----
