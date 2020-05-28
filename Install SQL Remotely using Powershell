@@ -1,3 +1,4 @@
+-----Explaination-----
 ##This script was designed for a single worksatation
 ##It can be modified to run on multiple machines
 
@@ -28,7 +29,7 @@
     #--example--#
         Write-Progress -Activity "Installing" -Status "Progressing" -PercentComplete $percent
 
-
+-----Full Example-----
 
 #--Begin--#
 
@@ -100,4 +101,4 @@ for ($percent=0; $percent -le 100; $percent++)
 
         Restart-Computer -ComputerName <client> -Force -Wait
 
- 
+ -----End-----
