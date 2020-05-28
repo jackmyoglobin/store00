@@ -3,10 +3,14 @@
 #All keys will be grabbed in no specific order#
 #Recommend storing keys in a secure vault i.e. KeePass#
 
+#This step is not necessary if running from an server with delegated rights to AD#
 Import-Module ActiveDirectory
+
+#Modify the Search Base to suit your infrastructure#
 Get-ADComputer -Filter 'ObjectClass -eq "computer"' -SearchBase "OU=,DC=,DC=" | foreach-object {
 $Computer = $_.name
-#Verify Computer Object Existence
+
+#Leave values as is from here#
 $Computer_Object = Get-ADComputer -Filter {cn -eq $Computer} -Property msTPM-OwnerInformation, msTPM-TpmInformationForComputer
 if($Computer_Object -eq $null){
 Write-Host "Error"
@@ -19,6 +23,8 @@ $BitLocker_Key = "none"
 }
 $strToReport = $Computer + "," + $BitLocker_Key
 Write-Host $strToReport
-#Export as Text File
+#Leave values as is to here#
+
+#Modify the path output and file name#
 $strToReport | out-file "\\path\file.txt" -append
 }
