@@ -1,4 +1,8 @@
+-----Explaination-----
+
 #Copy User A groups to User B MemberOf and Exclude select groups#
+
+------Guide------
 
 Set-ExecutionPolicy Unrestricted -force
 Import-Module ActiveDirectory
