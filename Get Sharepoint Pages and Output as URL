@@ -4,7 +4,7 @@
 #CSV should contain URL of Sharepoint page(s) and Site Title(s)#
 #The script must be ran under an account with Sharepoint owner rights#
 
------Guide------
+-----Example------
 
 $intranet = import-csv 'C:\temp\SharepointSites.csv' 
 $username = $env:USERNAME
