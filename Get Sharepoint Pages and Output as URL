@@ -1,5 +1,8 @@
 #Extract Sharepoint Pages and Content Links
-$intranet = import-csv 'C:\temp\SharepointSites.csv' #CSV should contain URL of Sharepoint page(s) and Site Title(s)#
+#CSV should contain URL of Sharepoint page(s) and Site Title(s)#
+#The script must be ran under an account with Sharepoint owner rights#
+
+$intranet = import-csv 'C:\temp\SharepointSites.csv' 
 $username = $env:USERNAME
 $PWord = ConvertTo-SecureString -String #removed after use#
 $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username,$PWord #removed after use#
