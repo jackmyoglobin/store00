@@ -1,7 +1,10 @@
-#Log onto Exchange 2013 EMS
-#Log onto Office 365 EMS
+-----Explaination-----
+#Log onto Exchange 2013 EMS#
+#Log onto Office 365 EMS#
 
 #Must Launch Powershell with 'Run As Administrator'
+
+-----Guide-----
 
 #Establish connection to Exchange Core commands
 Set-ExecutionPolicy RemoteSigned
@@ -13,3 +16,5 @@ Import-Pssession $Session
 
 #Deactivate and Disconnect EMS
 Remove-Pssession $session
+
+-----End-----
