@@ -1,6 +1,10 @@
+-----Explaination-----
+
 #This should only be used if sub folders or sub items: 
 1. parent permissions were not inherited, even if inheritance is enabled
 2. if sub directories do not have unique permissions
+
+-----Guide-----
 
 # This is for insurance, tell PowerShell that you want to work in the directory <path> you want to modify
 Set-Location "<path>"
@@ -25,5 +29,5 @@ foreach ($subfolder in $folders){
 
         }
 
-
+-----End-----
  
