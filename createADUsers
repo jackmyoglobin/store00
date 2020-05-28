@@ -1,4 +1,11 @@
+-----Explaination-----
+
 #Create User(s) using CSV Import
+#Use the "sample_csv.csv" for properties#
+#You could also create your own CSV using the properties specified below under "$user.%property%"#
+
+-----Guide-----
+
 #Use the sample_csv.csv as a template file when building import file#
 Clear-Host
 
@@ -74,4 +81,4 @@ Set-location '\\server\dfs\HOME'
                     New-Item $User.username -type directory 
                 }  
 
-
+-----End-----
