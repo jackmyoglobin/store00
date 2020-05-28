@@ -1,7 +1,10 @@
+-----Explaination-----
 #Script will run in specified searchbase#
 #Workstations with recovery keys will be collected and encapsulated into a txt file#
 #All keys will be grabbed in no specific order#
 #Recommend storing keys in a secure vault i.e. KeePass#
+
+-----Guide-----
 
 #This step is not necessary if running from an server with delegated rights to AD#
 Import-Module ActiveDirectory
@@ -28,3 +31,5 @@ Write-Host $strToReport
 #Modify the path output and file name#
 $strToReport | out-file "\\path\file.txt" -append
 }
+
+-----End-----
