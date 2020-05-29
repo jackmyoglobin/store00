@@ -10,7 +10,7 @@ The source location and install location should be the same ex. if source path i
 for ($percent=0; $percent -le 100; $percent++)
     {
         #Design Progresion Bar Description#
-        Write-Progress -Activity "Installing PhishMev5" -Status "Progress.." -PercentComplete $percent
+        Write-Progress -Activity "Installing Application" -Status "Progress.." -PercentComplete $percent
         
           #Specify installer source path and client destination#
           Copy-Item -Path 'C:\path\install.exe' -Destination '\\path\install.exe'
