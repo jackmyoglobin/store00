@@ -22,3 +22,5 @@ $Shortcut.Arguments = "URL"
 $Shortcut.WorkingDirectory = "${env:ProgramFiles(x86)}\Google\Chrome\Application"
 $Shortcut.IconLocation = $browserpath
 $Shortcut.Save()
+
+-----End-----
