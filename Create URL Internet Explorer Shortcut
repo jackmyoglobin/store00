@@ -21,3 +21,5 @@ $Shortcut.WorkingDirectory = "$env:programfiles\Internet Explorer"
 $Shortcut.WindowsStyle = 1
 $Shortcut.IconLocation = "iexplorer.exe, 0"
 $Shortcut.Save()
+
+-----End-----
