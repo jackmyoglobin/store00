@@ -1,0 +1,18 @@
+-----Explaination-----
+
+Meant to disable all USB Ports with Power management feature
+
+-----Example-----
+
+$HubID = (Get-WmiObject Win32_USBHub).PNPDeviceID
+$PowerMgmt = Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | Where {$_.InstanceName -like "*$HubID*"}
+$PowerMgmt.Enable = $False
+$PowerMgmt.psbase.Put()
+
+
+$HubControllerID = (Get-WmiObject Win32_USBController).PNPDeviceID
+$PowerMgmt = Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | Where {$_.InstanceName -like "*$HubControllerID*"}
+$PowerMgmt.Enable = $False
+$PowerMgmt.psbase.Put()
+
+-----End-----
