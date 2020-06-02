@@ -1,0 +1,35 @@
+-----Explaination-----
+
+Create restore point
+Get Restore Point
+Run Restore Point
+
+-----Example-----
+
+#Create a Restore point, update 'restore' to unique name
+Enable-ComputerRestore -Drive C:
+vssadmin resize shadowstorage /for=c: /on=c: /maxsize=5%
+Checkpoint-Computer -Description "restore" -RestorePointType MODIFY_SETTINGS
+
+#Retrieve existing Restore points
+Get-ComputerrestorePoint
+
+#Initiate Restore Point Process
+Restore-Computer -Restorepoint <name>
+
+#You can also combine the latter two commands into a single statement
+Get-ComputerrestorePoint <name> | Restore-Computer
+
+-----Notes-----
+
+Different 'RestorePointType'
+-Application_Install
+-Application_Uninstall
+-Device_Driver_Install
+-Modify_Settings
+**The default setting, if none specified, is Application_Install
+
+Use switches for Get-ComputerRestorePoints i.e. '-RestorePoint <name>'
+
+
+-----End-----
