@@ -8,7 +8,7 @@
 
 $intranet = import-csv 'C:\temp\SharepointSites.csv' 
 $username = $env:USERNAME
-$PWord = ConvertTo-SecureString -String #removed after use#
+$PWord = ConvertTo-SecureString -String #removed after use# -AsPlainText -Force
 $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username,$PWord #removed after use#
 
 foreach ($page in $intranet){
