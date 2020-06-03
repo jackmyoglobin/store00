@@ -58,7 +58,7 @@ foreach ($object in $importcsv){
 
     $hostname = $object.name
 
-    robocopy $source /r:0 /w:0 "\\$hostname\c$\Dell\3050" /mir
+    robocopy $source /r:0 /w:0 "\\$hostname\c$\softwares" /mir
 
   Invoke-Command -ComputerName $hostname -ScriptBlock {
         for ($percent=0; $percent -le 100; $percent++)
