@@ -11,8 +11,8 @@
 #Step 2.a-Only run when Step 2.0 fails, stop script#
 #Step 1.a-Only run when Step 1.0 fails, stop script#
 
-Step 1.0  IF ((Get-WmiObject Win32_Computersystem).name -like 'hostname')
-Step 2.0  {If((Get-BitLockerVolume).ProtectionStatus -eq 'On')
+Step 1.0    IF ((Get-WmiObject Win32_Computersystem).name -like 'hostname')
+Step 2.0    {If((Get-BitLockerVolume).ProtectionStatus -eq 'On')
     {
 Step 2.1    Get-BitlockerVolume | select -expandproperty mountpoint | Set-Variable -Name "BLV"
 Step 2.2    Disable-BitLocker -MountPoint $BLV  
