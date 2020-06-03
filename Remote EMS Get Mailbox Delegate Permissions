@@ -6,7 +6,7 @@ Access EMS and review Mailbox Delegates and delegate Permissions
 
 #Initiate connection to EMS#
 #Inquire Mailbox
-Get-MailboxPermission -Identity %mailbox% | Select-Object User,AccessRights,IsInherited,Deny | Where-Object {$_.User -Like "ANC\*"} | Sort-Object AccessRights | FT -AutoSize -Wrap
+Get-MailboxPermission -Identity %mailbox% | Select-Object User,AccessRights,IsInherited,Deny | Where-Object {$_.User -Like "Domain\*"} | Sort-Object AccessRights | FT -AutoSize -Wrap
 **You can also export as CSV or Txt File using 'Export-CSV' or 'Out-File'**
 
 -----Notes-----
