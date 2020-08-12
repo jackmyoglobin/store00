@@ -32,4 +32,7 @@ Reviewer - Can view entries from members, but cannot read entries from members.
 Contributor - Only add entries.
 None - No Access.
 
+When assigning access to a mailbox root or sub folder(s), to allow a delegate to 
+delete target mailbox items you must assign them permissions to the target mailbox "Deleted Items" folder
+
 -----End----- 
