@@ -8,6 +8,14 @@ Unlock-ADAccount -Identity %username%
 #Mass AD User Unlock in specified OU#
 Search-ADAccount -SearchBase 'OU=,OU=,DC=Domain,DC=local' -LockedOut | Unlock-ADAccount
 
+-----Query User and Get Password Expiry Date-----
+
+#Scope's to a single user#
+Get-ADUser -Identity '%username%' –Properties “DisplayName”,“msDS-UserPasswordExpiryTimeComputed” | Select-Object -Property “Displayname”,@{Name=“ExpiryDate”;Expression={[datetime]::FromFileTime($_.“msDS-UserPasswordExpiryTimeComputed”)}}
+
+#Impacts entire AD tree#
+Get-ADUser -filter {Enabled -eq $True -and PasswordNeverExpires -eq $False} –Properties “DisplayName”,“msDS-UserPasswordExpiryTimeComputed” | Select-Object -Property “Displayname”,@{Name=“ExpiryDate”;Expression={[datetime]::FromFileTime($_.“msDS-UserPasswordExpiryTimeComputed”)}}
+
 -----Query User and Selecting specific properties-----
 
 #Get User Canonicalname#
