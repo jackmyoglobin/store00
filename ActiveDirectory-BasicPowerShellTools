@@ -48,3 +48,20 @@ Set-ADAccountExpiration -Identity %username% -DateTime '04/26/2019 17:00:00'
 #Get AD User Expiration#
 Get-ADUser -Identity %username% -Properties AccountExpirationDate | Select-Object -Property SamAccountName, AccountExpirationDate
 
+# Check out to a temporary branch:
+git checkout --orphan TEMP_BRANCH
+
+# Add all the files:
+git add -A
+
+# Commit the changes:
+git commit -am "Initial commit"
+
+# Delete the old branch:
+git branch -D master
+
+# Rename the temporary branch to master:
+git branch -m master
+
+# Finally, force update to our repository:
+git push -f origin master
